@@ -8,6 +8,15 @@ import (
 	"strings"
 )
 
+func parseHelp(arg string) bool {
+	arg = strings.ToLower(arg)
+	switch arg {
+	case "help", "h", "-h", "--help":
+		return true
+	}
+	return false
+}
+
 func help() {
 	fmt.Println(`kwa - super simple awk
 Usage:
@@ -23,6 +32,10 @@ func main() {
 	column := 0
 	var err error
 	if len(os.Args) == 2 {
+		if parseHelp(os.Args[1]) {
+			help()
+			os.Exit(0)
+		}
 		column, err = strconv.Atoi(os.Args[1])
 		if err != nil || column < 0 {
 			fmt.Println("please provide a valid column number [0, ...]")
