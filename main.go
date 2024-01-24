@@ -8,6 +8,17 @@ import (
 	"strings"
 )
 
+func help() {
+	fmt.Println(`kwa - super simple awk
+Usage:
+	
+	cat stdin | kwa <column nr | default: 0>
+
+kwa:
+	o help - display this message.
+`)
+}
+
 func main() {
 	column := 0
 	var err error
